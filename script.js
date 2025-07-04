@@ -21,7 +21,7 @@ let mouse = {
 }
 
 // Số hình tròn tạo ra cùng 1 lúc
-let circleNum = 2;
+let circleNum = 1;
 
 // Chỉ số màu sắc hue
 let hue = 0;
@@ -44,12 +44,14 @@ class Circle{
         this.speedX = Math.random()*this.speed-this.speed/2;
         this.speedY = Math.random()*this.speed-this.speed/2;
         this.shrinkSpeed = Math.random()*0.05+0.05;
-        this.color = /*"hsl("+hue+",100%, 50%)"; */ "hsl(178, 98%, 80%)"
+        this.color = /*"hsl("+hue+",100%, 50%)"; */ "#7DF9FF"
     }
 
     // Hàm draw vẽ bản thân hình tròn
     draw(){
         context.fillStyle = this.color;
+        context.shadowColor = '#00FFFF'; // glow color
+        context.shadowBlur = 3;
         drawCircle(this.x,this.y,this.r);
     }
 
@@ -118,8 +120,8 @@ function handleCircle() {
                 // context.closePath();
 
                 // upgrade thành tia điện
-                let lightningPointNum = Math.random()*2+1;
-                let lightningAmplitude = 75;
+                let lightningPointNum = Math.random()+1;
+                let lightningAmplitude = 60;
                 let lightningPointArray = [];
                 let DVector = new Vector(dx,dy);
                 let perpendicularDVector = new Vector(-dy,dx);
@@ -169,7 +171,7 @@ function handleCircle() {
 // cập nhật mỗi khi event click và mousemove xảy ra
 function animate() {
     //Xoá frame trước đó
-    context.fillStyle = "rgba(0,0,0,0.1)"; // Đè lên một khung có màu đen sáng để làm mờ màu, tạo ra mouse trail
+    context.fillStyle = "rgba(0,0,0,0.5)"; // Đè lên một khung có màu đen sáng để làm mờ màu, tạo ra mouse trail
     context.fillRect(0,0,canvas.clientWidth,canvas.clientHeight);
 
     // Gọi hàm handleCircle để vẽ và update các hình tròn
